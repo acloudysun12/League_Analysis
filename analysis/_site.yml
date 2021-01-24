@@ -1,7 +1,7 @@
-name: "League_Analysis"
+name: League_Analysis
 output_dir: ../docs
 navbar:
-  title: "League_Analysis"
+  title: League_Analysis
   left:
   - text: Home
     href: index.html
@@ -9,6 +9,10 @@ navbar:
     href: about.html
   - text: License
     href: license.html
+  right:
+  - icon: fa-github
+    text: Source code
+    href: https://github.com/acloudysun12/League_Analysis
 output:
   workflowr::wflow_html:
     toc: yes

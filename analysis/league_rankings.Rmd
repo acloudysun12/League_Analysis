@@ -22,16 +22,16 @@ Updated as of 1/24/2021
 # RO, G2, SO4, MSF, EX, MAD, VT, AS, SK, FNC
 
 A = matrix(
-  c(0,0,0,0,1,0,0,0,1,1, #RO
-    0,0,0,0,1,1,0,0,1,0, #G2
-    0,0,0,0,0,0,1,0,0,0, #S04
-    0,0,0,0,0,1,0,0,0,1, #MSF
-    0,0,1,0,0,0,0,0,0,0, #EX
-    0,0,0,0,0,0,0,1,0,0, #MAD
+  c(0,0,0,1,1,1,1,1,1,1, #RO
+    1,0,0,1,1,1,1,1,1,0, #G2
+    1,1,0,1,0,0,1,0,1,0, #S04
+    0,0,0,0,0,1,0,1,0,1, #MSF
+    0,0,1,1,0,0,1,1,1,0, #EX
+    0,0,1,0,1,0,1,1,0,1, #MAD
     0,0,0,1,0,0,0,0,0,0, #VT
-    0,0,0,0,0,0,1,0,0,0, #AS
-    0,0,0,0,0,0,0,1,0,0, #SK
-    0,0,1,0,0,0,0,0,0,0), #FNC
+    0,0,1,0,0,0,1,0,0,0, #AS
+    0,0,0,1,0,1,1,1,0,0, #SK
+    0,1,1,0,1,0,1,1,1,0), #FNC
   byrow = T, nrow = 10
 )
 
@@ -48,8 +48,14 @@ Most up-to-date rankings for LEC based on games played.
 teams = c("RGE", "G2", "SO4", "MSF", "EXL", "MAD", "VT", "AST", "SK", "FNC")
 ranking_vals = rowSums(A + A%*%A)
 df_lec_rankings = data.frame(teams = teams, rankings = ranking_vals)
-df_lec_rankings
+df_lec_rankings %>% arrange(desc(rankings))
+
 
 ```
+
+
+
+
+
 
 

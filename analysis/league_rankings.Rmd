@@ -55,7 +55,7 @@ df_lec_rankings %>% arrange(desc(rankings))
 
 <br>
 
-### LEC Final Games Rankings <br>
+### LEC Final Games Placements <br>
 
 Updated as of 2021/03/13 <br>
 

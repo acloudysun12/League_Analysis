@@ -7,6 +7,8 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
+rm(list=ls())
+
 library(ggplot2)
 library(stringr)
 library(tidyverse)
@@ -16,7 +18,7 @@ library(tidyverse)
 
 ### LEC Rankings <br>
 
-Updated as of 2021/03/13
+Updated as of 2021/03/14
 
 ```{r}
 # RO, G2, SO4, MSF, EX, MAD, VT, AS, SK, FNC
@@ -26,7 +28,7 @@ A = matrix(
     2,0,1,2,1,1,2,2,1,1, #G2
     1,1,0,1,0,0,2,1,1,1, #S04
     0,0,1,0,1,2,0,2,0,1, #MSF
-    1,0,1,1,0,0,1,1,1,0, #EX
+    1,1,1,1,0,0,1,1,1,0, #EX
     0,0,2,0,2,0,2,1,0,2, #MAD
     0,0,0,1,1,0,0,0,1,1, #VT
     0,0,1,0,1,0,2,0,1,0, #AS
@@ -42,7 +44,7 @@ rowSums(A + A%*%A)
 
 <br>
 
-Most up-to-date rankings for LEC based on games played. 
+Final rankings for LEC based on games played, with "power" rankings included as well (e.g. not all wins equal).
 
 ```{r}
 
@@ -59,14 +61,14 @@ df_lec_rankings %>% arrange(desc(rankings))
 
 Updated as of 2021/03/13 <br>
 
-Possibilities of teams making to play-offs, top 6, top 4 
+Possibilities of teams making to play-offs, top 6, top 4. 
 
 ```{r}
 teams = c("RGE", "G2", "SO4", "MSF", "EXL", "MAD", "VT", "AST", "SK", "FNC")
 
 # RO-EX, FNC-MSF, G2-MAD, VIT-MSF, S04-EX, MAD-AST, G2-SK, FNC-RO
 games_remain = 
-  expand.grid(g1 = c("RGE","EXL"), g2 = c("FNC","MSF"), g3 = c("G2", "MAD"), 
+  expand.grid(g2 = c("FNC","MSF"), g3 = c("G2", "MAD"), 
               g4 = c("VIT", "MSF"), g5 = c("S04","EXL"), g6 = c("MAD", "AST"), 
               g7 = c("G2", "SK"), g8 = c("FNC", "RGE"), stringsAsFactors = F) %>% as.matrix()
 
@@ -74,8 +76,8 @@ vec_curr = rowSums(A)
 games_path = games_remain[3,]
 
 
-team_of_int = "FNC"
-idx = 10
+# team_of_int = "FNC"
+# idx = 10
 get_final_placements = function(games_path, team_of_int = "FNC"){
   for(idx in 1:length(teams)){
   team_idx_wins = sum(str_detect(games_path, teams[idx]))

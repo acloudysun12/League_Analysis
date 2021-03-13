@@ -515,16 +515,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomacloudysun12LeagueAnalysistree9796fa4309a7ead9752f871f2b0edc999416dae3targetblank9796fa4a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/acloudysun12/League_Analysis/tree/9796fa4309a7ead9752f871f2b0edc999416dae3" target="_blank">9796fa4</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomacloudysun12LeagueAnalysistree1f78eb9d36014627ca38e2b6e8b6ddee11ea0b98targetblank1f78eb9a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/acloudysun12/League_Analysis/tree/1f78eb9d36014627ca38e2b6e8b6ddee11ea0b98" target="_blank">1f78eb9</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomacloudysun12LeagueAnalysistree9796fa4309a7ead9752f871f2b0edc999416dae3targetblank9796fa4a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomacloudysun12LeagueAnalysistree1f78eb9d36014627ca38e2b6e8b6ddee11ea0b98targetblank1f78eb9a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/acloudysun12/League_Analysis/tree/9796fa4309a7ead9752f871f2b0edc999416dae3" target="_blank">9796fa4</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/acloudysun12/League_Analysis/tree/1f78eb9d36014627ca38e2b6e8b6ddee11ea0b98" target="_blank">1f78eb9</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -570,6 +570,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/acloudysun12/League_Analysis/blob/1f78eb9d36014627ca38e2b6e8b6ddee11ea0b98/analysis/league_rankings.Rmd" target="_blank">1f78eb9</a>
+</td>
+<td>
+acloudysun12
+</td>
+<td>
+2021-03-13
+</td>
+<td>
+updated rankings post MSF win against FNC
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/acloudysun12/League_Analysis/128288fff278ddad879c6ab8c5ceb842f8831ce8/docs/league_rankings.html" target="_blank">128288f</a>
+</td>
+<td>
+acloudysun12
+</td>
+<td>
+2021-03-13
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -790,7 +824,7 @@ A = matrix(
   c(0,0,1,2,1,2,2,2,2,1, #RO
     2,0,1,2,1,1,2,2,1,1, #G2
     1,1,0,1,0,0,2,1,1,1, #S04
-    0,0,1,0,1,2,0,2,0,1, #MSF
+    0,0,1,0,1,2,0,2,0,2, #MSF
     1,1,1,1,0,0,1,1,1,0, #EX
     0,0,2,0,2,0,2,1,0,2, #MAD
     0,0,0,1,1,0,0,0,1,1, #VT
@@ -801,9 +835,9 @@ A = matrix(
 )
 
 rowSums(A)</code></pre>
-<pre><code> [1] 13 13  8  7  7  9  4  5  8  9</code></pre>
+<pre><code> [1] 13 13  8  8  7  9  4  5  8  9</code></pre>
 <pre class="r"><code>rowSums(A + A%*%A)</code></pre>
-<pre><code> [1] 103 112  71  59  65  70  35  36  64  74</code></pre>
+<pre><code> [1] 105 114  72  69  66  70  36  36  66  74</code></pre>
 <p><br></p>
 <p>Final rankings for LEC based on games played, with “power” rankings included as well (e.g. not all wins equal).</p>
 <pre class="r"><code>teams = c(&quot;RGE&quot;, &quot;G2&quot;, &quot;SO4&quot;, &quot;MSF&quot;, &quot;EXL&quot;, &quot;MAD&quot;, &quot;VT&quot;, &quot;AST&quot;, &quot;SK&quot;, &quot;FNC&quot;)
@@ -811,16 +845,16 @@ ranking_vals = rowSums(A + A%*%A)
 df_lec_rankings = data.frame(teams = teams, rankings = ranking_vals)
 df_lec_rankings %&gt;% arrange(desc(rankings))</code></pre>
 <pre><code>   teams rankings
-1     G2      112
-2    RGE      103
+1     G2      114
+2    RGE      105
 3    FNC       74
-4    SO4       71
+4    SO4       72
 5    MAD       70
-6    EXL       65
-7     SK       64
-8    MSF       59
-9    AST       36
-10    VT       35</code></pre>
+6    MSF       69
+7    EXL       66
+8     SK       66
+9     VT       36
+10   AST       36</code></pre>
 <p><br></p>
 </div>
 <div id="lec-final-games-placements" class="section level3">
@@ -831,7 +865,7 @@ df_lec_rankings %&gt;% arrange(desc(rankings))</code></pre>
 
 # RO-EX, FNC-MSF, G2-MAD, VIT-MSF, S04-EX, MAD-AST, G2-SK, FNC-RO
 games_remain = 
-  expand.grid(g2 = c(&quot;FNC&quot;,&quot;MSF&quot;), g3 = c(&quot;G2&quot;, &quot;MAD&quot;), 
+  expand.grid(g3 = c(&quot;G2&quot;, &quot;MAD&quot;), 
               g4 = c(&quot;VIT&quot;, &quot;MSF&quot;), g5 = c(&quot;S04&quot;,&quot;EXL&quot;), g6 = c(&quot;MAD&quot;, &quot;AST&quot;), 
               g7 = c(&quot;G2&quot;, &quot;SK&quot;), g8 = c(&quot;FNC&quot;, &quot;RGE&quot;), stringsAsFactors = F) %&gt;% as.matrix()
 
@@ -865,38 +899,44 @@ get_lowest_placements = function(games_path, team_of_int = &quot;FNC&quot;){
 <p>FNC – what are likely scenarios? How many possibilities might they not make it? What about top 4? <br> They’re 100% in!</p>
 <pre class="r"><code>fnc_possible_ranking = apply(games_remain, MARGIN = 1, FUN = get_final_placements, team_of_int = &quot;FNC&quot;)
 print(fnc_possible_ranking)</code></pre>
-<pre><code>  [1] 3 4 4 4 3 4 4 4 3 4 4 4 3 4 4 4 3 3 3 4 3 3 3 4 3 3 3 4 3 3 3 4 3 4 4 4 3
- [38] 4 4 4 3 4 4 4 3 4 4 4 3 3 3 4 3 3 3 4 3 3 3 4 3 3 3 4 4 4 4 4 4 5 4 5 4 4
- [75] 4 4 4 5 4 5 3 4 4 4 3 5 4 5 3 4 4 4 3 5 4 5 4 5 4 5 4 6 4 6 4 5 4 5 4 6 4
-[112] 6 3 5 4 5 3 6 4 6 3 5 4 5 3 6 4 6</code></pre>
+<pre><code> [1] 4 4 4 4 4 4 4 4 3 4 3 4 3 4 3 4 4 4 4 4 4 4 4 4 3 4 3 4 3 4 3 4 4 4 5 5 4 4
+[39] 5 5 4 4 5 5 4 4 5 5 5 5 6 6 5 5 6 6 5 5 6 6 5 5 6 6</code></pre>
 <pre class="r"><code>fnc_lowest_ranking = apply(games_remain, MARGIN = 1, FUN = get_lowest_placements, team_of_int = &quot;FNC&quot;)
 print(fnc_lowest_ranking)</code></pre>
-<pre><code>  [1] 3 4 4 4 3 4 4 4 3 4 4 4 3 4 4 4 3 3 3 4 3 3 3 4 3 3 3 4 3 3 3 4 3 4 4 4 3
- [38] 4 4 4 3 4 4 4 3 4 4 4 3 3 3 4 3 3 3 4 3 3 3 4 3 3 3 4 4 4 4 4 4 5 4 5 4 4
- [75] 4 4 4 5 4 5 3 4 4 4 3 5 4 5 3 4 4 4 3 5 4 5 4 5 4 5 4 6 4 6 4 5 4 5 4 6 4
-[112] 6 3 5 4 5 3 6 4 6 3 5 4 5 3 6 4 6</code></pre>
+<pre><code> [1] 4 4 4 4 4 4 4 4 3 4 3 4 3 4 3 4 4 4 4 4 4 4 4 4 3 4 3 4 3 4 3 4 4 4 5 5 4 4
+[39] 5 5 4 4 5 5 4 4 5 5 5 5 6 6 5 5 6 6 5 5 6 6 5 5 6 6</code></pre>
 <pre class="r"><code>print(&quot;Likelihood of Scenarios for FNC NOT Top 4&quot;)</code></pre>
 <pre><code>[1] &quot;Likelihood of Scenarios for FNC NOT Top 4&quot;</code></pre>
 <pre class="r"><code>round(sum(fnc_lowest_ranking &gt; 4)/length(fnc_lowest_ranking), 3)</code></pre>
-<pre><code>[1] 0.188</code></pre>
+<pre><code>[1] 0.375</code></pre>
 <p><br></p>
-<p>EXL – what are their likely scenarios? How many possibilities might they not make it?</p>
+<p>EXL – what are their likely scenarios? How many possibilities might they not make it? <br> MSF won the game today, which means EXL is now out.</p>
 <pre class="r"><code>exl_possible_ranking = apply(games_remain, MARGIN = 1, FUN = get_final_placements, team_of_int = &quot;EXL&quot;)
 print(exl_possible_ranking)</code></pre>
-<pre><code>  [1] 8 8 8 8 8 8 8 8 6 7 6 7 7 7 7 7 8 8 8 8 8 8 8 8 6 7 6 7 7 7 7 7 8 8 8 8 8
- [38] 8 8 8 7 8 7 8 8 8 8 8 8 8 8 8 8 8 8 8 7 8 7 8 8 8 8 8 8 8 8 8 8 8 8 8 6 7
- [75] 6 7 7 7 7 7 8 8 8 8 8 8 8 8 6 7 6 7 7 7 7 7 8 8 8 8 8 8 8 8 7 8 7 8 8 8 8
-[112] 8 8 8 8 8 8 8 8 8 7 8 7 8 8 8 8 8</code></pre>
+<pre><code> [1] 8 8 8 8 7 7 7 7 8 8 8 8 7 7 7 7 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 7 7
+[39] 7 7 8 8 8 8 7 7 7 7 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8</code></pre>
 <pre class="r"><code>exl_lowest_ranking = apply(games_remain, MARGIN = 1, FUN = get_lowest_placements, team_of_int = &quot;EXL&quot;)
 print(exl_lowest_ranking)</code></pre>
-<pre><code>  [1] 8 8 8 8 8 8 8 8 7 8 7 8 8 8 8 8 8 8 8 8 8 8 8 8 7 8 7 8 8 8 8 8 8 8 8 8 8
- [38] 8 8 8 7 8 7 8 8 8 8 8 8 8 8 8 8 8 8 8 7 8 7 8 8 8 8 8 8 8 8 8 8 8 8 8 7 8
- [75] 7 8 8 8 8 8 8 8 8 8 8 8 8 8 7 8 7 8 8 8 8 8 8 8 8 8 8 8 8 8 7 8 7 8 8 8 8
-[112] 8 8 8 8 8 8 8 8 8 7 8 7 8 8 8 8 8</code></pre>
+<pre><code> [1] 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8
+[39] 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8</code></pre>
 <pre class="r"><code>print(&quot;Likelihood of Scenarios for EXL MAKING Top 6&quot;)</code></pre>
 <pre><code>[1] &quot;Likelihood of Scenarios for EXL MAKING Top 6&quot;</code></pre>
 <pre class="r"><code>round(sum(exl_possible_ranking &lt;= 6)/length(exl_possible_ranking), 3)</code></pre>
-<pre><code>[1] 0.062</code></pre>
+<pre><code>[1] 0</code></pre>
+<p><br></p>
+<p>MSF – what happens now that they won against FNC on 3/13/2021?</p>
+<pre class="r"><code>MSF_possible_ranking = apply(games_remain, MARGIN = 1, FUN = get_final_placements, team_of_int = &quot;MSF&quot;)
+print(MSF_possible_ranking)</code></pre>
+<pre><code> [1] 6 6 5 5 6 6 5 5 6 6 4 5 6 6 4 5 7 7 5 5 7 7 5 5 7 7 4 5 7 7 4 5 6 6 4 4 6 6
+[39] 4 4 6 6 3 4 6 6 3 4 7 7 4 4 7 7 4 4 7 7 3 4 7 7 3 4</code></pre>
+<pre class="r"><code>MSF_lowest_ranking = apply(games_remain, MARGIN = 1, FUN = get_lowest_placements, team_of_int = &quot;MSF&quot;)
+print(MSF_lowest_ranking)</code></pre>
+<pre><code> [1] 7 7 5 5 8 8 5 5 7 7 5 5 8 8 5 5 7 7 6 6 8 8 6 6 7 7 6 6 8 8 6 6 7 7 5 5 8 8
+[39] 5 5 7 7 5 5 8 8 5 5 7 7 6 6 8 8 6 6 7 7 6 6 8 8 6 6</code></pre>
+<pre class="r"><code>print(&quot;Likelihood of Scenarios for MSF MAKING Top 6&quot;)</code></pre>
+<pre><code>[1] &quot;Likelihood of Scenarios for MSF MAKING Top 6&quot;</code></pre>
+<pre class="r"><code>round(sum(MSF_possible_ranking &lt;= 6)/length(MSF_possible_ranking), 3)</code></pre>
+<pre><code>[1] 0.75</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">

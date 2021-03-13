@@ -27,7 +27,7 @@ A = matrix(
   c(0,0,1,2,1,2,2,2,2,1, #RO
     2,0,1,2,1,1,2,2,1,1, #G2
     1,1,0,1,0,0,2,1,1,1, #S04
-    0,0,1,0,1,2,0,2,0,1, #MSF
+    0,0,1,0,1,2,0,2,0,2, #MSF
     1,1,1,1,0,0,1,1,1,0, #EX
     0,0,2,0,2,0,2,1,0,2, #MAD
     0,0,0,1,1,0,0,0,1,1, #VT
@@ -68,7 +68,7 @@ teams = c("RGE", "G2", "SO4", "MSF", "EXL", "MAD", "VT", "AST", "SK", "FNC")
 
 # RO-EX, FNC-MSF, G2-MAD, VIT-MSF, S04-EX, MAD-AST, G2-SK, FNC-RO
 games_remain = 
-  expand.grid(g2 = c("FNC","MSF"), g3 = c("G2", "MAD"), 
+  expand.grid(g3 = c("G2", "MAD"), 
               g4 = c("VIT", "MSF"), g5 = c("S04","EXL"), g6 = c("MAD", "AST"), 
               g7 = c("G2", "SK"), g8 = c("FNC", "RGE"), stringsAsFactors = F) %>% as.matrix()
 
@@ -117,7 +117,8 @@ round(sum(fnc_lowest_ranking > 4)/length(fnc_lowest_ranking), 3)
  
 <br>
 
-EXL -- what are their likely scenarios? How many possibilities might they not make it?
+EXL -- what are their likely scenarios? How many possibilities might they not make it? <br>
+MSF won the game today, which means EXL is now out. 
 
 ```{r}
 exl_possible_ranking = apply(games_remain, MARGIN = 1, FUN = get_final_placements, team_of_int = "EXL")
@@ -126,5 +127,18 @@ exl_lowest_ranking = apply(games_remain, MARGIN = 1, FUN = get_lowest_placements
 print(exl_lowest_ranking)
 print("Likelihood of Scenarios for EXL MAKING Top 6")
 round(sum(exl_possible_ranking <= 6)/length(exl_possible_ranking), 3)
+```
+
+<br>
+
+MSF -- what happens now that they won against FNC on 3/13/2021?
+
+```{r}
+MSF_possible_ranking = apply(games_remain, MARGIN = 1, FUN = get_final_placements, team_of_int = "MSF")
+print(MSF_possible_ranking)
+MSF_lowest_ranking = apply(games_remain, MARGIN = 1, FUN = get_lowest_placements, team_of_int = "MSF")
+print(MSF_lowest_ranking)
+print("Likelihood of Scenarios for MSF MAKING Top 6")
+round(sum(MSF_possible_ranking <= 6)/length(MSF_possible_ranking), 3)
 ```
 

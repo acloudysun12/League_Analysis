@@ -8,32 +8,34 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 
 library(ggplot2)
+library(stringr)
 library(tidyverse)
 
 ```
 
 
-### LEC Rankings
+### LEC Rankings <br>
 
-Updated as of 2/14/2021
+Updated as of 2021/03/13
 
 ```{r}
 # RO, G2, SO4, MSF, EX, MAD, VT, AS, SK, FNC
 
 A = matrix(
-  c(0,0,0,1,1,1,1,1,1,1, #RO
-    1,0,0,1,1,1,1,1,1,0, #G2
-    1,1,0,1,0,0,1,0,1,0, #S04
-    0,0,0,0,0,1,0,1,0,1, #MSF
-    0,0,1,1,0,0,1,1,1,0, #EX
-    0,0,1,0,1,0,1,1,0,1, #MAD
-    0,0,0,1,0,0,0,0,0,0, #VT
-    0,0,1,0,0,0,1,0,0,0, #AS
-    0,0,0,1,0,1,1,1,0,0, #SK
-    0,1,1,0,1,0,1,1,1,0), #FNC
+  c(0,0,1,2,1,2,2,2,2,1, #RO
+    2,0,1,2,1,1,2,2,1,1, #G2
+    1,1,0,1,0,0,2,1,1,1, #S04
+    0,0,1,0,1,2,0,2,0,1, #MSF
+    1,0,1,1,0,0,1,1,1,0, #EX
+    0,0,2,0,2,0,2,1,0,2, #MAD
+    0,0,0,1,1,0,0,0,1,1, #VT
+    0,0,1,0,1,0,2,0,1,0, #AS
+    0,0,1,2,1,2,1,1,0,0, #SK
+    0,1,1,0,2,0,1,2,2,0), #FNC
   byrow = T, nrow = 10
 )
 
+rowSums(A)
 rowSums(A + A%*%A)
 
 ```
@@ -49,10 +51,78 @@ ranking_vals = rowSums(A + A%*%A)
 df_lec_rankings = data.frame(teams = teams, rankings = ranking_vals)
 df_lec_rankings %>% arrange(desc(rankings))
 
+```
+
+<br>
+
+### LEC Final Games Rankings <br>
+
+Updated as of 2021/03/13 <br>
+
+Possibilities of teams making to play-offs, top 6, top 4 
+
+```{r}
+teams = c("RGE", "G2", "SO4", "MSF", "EXL", "MAD", "VT", "AST", "SK", "FNC")
+
+# RO-EX, FNC-MSF, G2-MAD, VIT-MSF, S04-EX, MAD-AST, G2-SK, FNC-RO
+games_remain = 
+  expand.grid(g1 = c("RGE","EXL"), g2 = c("FNC","MSF"), g3 = c("G2", "MAD"), 
+              g4 = c("VIT", "MSF"), g5 = c("S04","EXL"), g6 = c("MAD", "AST"), 
+              g7 = c("G2", "SK"), g8 = c("FNC", "RGE"), stringsAsFactors = F) %>% as.matrix()
+
+vec_curr = rowSums(A)
+games_path = games_remain[3,]
+
+
+team_of_int = "FNC"
+idx = 10
+get_final_placements = function(games_path, team_of_int = "FNC"){
+  for(idx in 1:length(teams)){
+  team_idx_wins = sum(str_detect(games_path, teams[idx]))
+  vec_curr[idx] = vec_curr[idx] + team_idx_wins
+  }
+  df_rankings = data.frame(teams = teams, wins = vec_curr) %>% arrange(desc(wins))
+  final_placements = which(df_rankings$teams == team_of_int)
+  return(final_placements)
+}
+
+get_lowest_placements = function(games_path, team_of_int = "FNC"){
+  for(idx in 1:length(teams)){
+  team_idx_wins = sum(str_detect(games_path, teams[idx]))
+  vec_curr[idx] = vec_curr[idx] + team_idx_wins
+  }
+  df_rankings = data.frame(teams = teams, wins = vec_curr) %>% arrange(desc(wins))
+  final_placements = which(df_rankings$teams == team_of_int)
+  lowest_placements = max(which(df_rankings$wins == df_rankings$wins[final_placements]))
+  return(lowest_placements)
+}
 
 ```
 
+<br>
 
+FNC -- what are likely scenarios? How many possibilities might they not make it? What about top 4? <br>
+They're 100% in! 
 
+```{r}
+fnc_possible_ranking = apply(games_remain, MARGIN = 1, FUN = get_final_placements, team_of_int = "FNC")
+print(fnc_possible_ranking)
+fnc_lowest_ranking = apply(games_remain, MARGIN = 1, FUN = get_lowest_placements, team_of_int = "FNC")
+print(fnc_lowest_ranking)
+print("Likelihood of Scenarios for FNC NOT Top 4")
+round(sum(fnc_lowest_ranking > 4)/length(fnc_lowest_ranking), 3)
+```
+ 
+<br>
 
+EXL -- what are their likely scenarios? How many possibilities might they not make it?
+
+```{r}
+exl_possible_ranking = apply(games_remain, MARGIN = 1, FUN = get_final_placements, team_of_int = "EXL")
+print(exl_possible_ranking)
+exl_lowest_ranking = apply(games_remain, MARGIN = 1, FUN = get_lowest_placements, team_of_int = "EXL")
+print(exl_lowest_ranking)
+print("Likelihood of Scenarios for EXL MAKING Top 6")
+round(sum(exl_possible_ranking <= 6)/length(exl_possible_ranking), 3)
+```
 
